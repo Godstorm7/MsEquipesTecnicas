@@ -1,1 +1,9 @@
-.idea/ 
+.idea/
+__pycache__/
+*.pyc
+.venv/
+*.rar
+*.zip
+*.tar
+*.log
+*.db

@@ -1,0 +1,63 @@
+# Rotas do serviço de Equipes Técnicas
+
+# Listar todas as equipes técnicas
+GET /equipes
+# Retorna uma lista de todas as equipes técnicas cadastradas.
+
+# Consultar uma equipe técnica específica por ID
+GET /equipes/<int:id>
+# Retorna os dados de uma equipe técnica específica, incluindo seus membros.
+
+# Listar todas as equipes técnicas ativas
+GET /equipes/ativas
+# Retorna uma lista de equipes técnicas com status 'ativa'.
+
+# Consultar uma equipe técnica ativa por ID
+GET /equipes/ativas/<int:id>
+# Retorna os dados de uma equipe ativa específica.
+
+# Listar equipes técnicas por status ('ativa' ou 'inativa')
+GET /equipes/status/<status>
+# Retorna equipes técnicas filtradas pelo status informado.
+
+# Criar uma nova equipe técnica
+POST /equipes
+# Cria uma nova equipe técnica. O corpo da requisição deve conter nome, especialidade, status ("ativa" ou "inativa") e, opcionalmente, membros.
+
+# Atualizar dados de uma equipe técnica
+PUT /equipes/<int:id>
+# Atualiza os dados de uma equipe técnica específica. Permite atualizar nome, especialidade, status e membros.
+
+# Atualizar apenas o status de uma equipe técnica
+PUT /equipes/<int:id>/<status>
+# Atualiza apenas o status ("ativa" ou "inativa") de uma equipe técnica.
+
+# Excluir (ou desativar) uma equipe técnica
+DELETE /equipes/<int:id>
+# Exclui uma equipe técnica específica. Dependendo da implementação, pode ser uma exclusão lógica (desativação).
+
+
+
+
+
+# Rotas para gerenciamento de membros das equipes técnicas
+
+# Criar um novo membro em uma equipe
+POST /membros
+# Cria um novo membro em uma equipe existente. O corpo da requisição deve conter nome, cargo, contato e equipe_id.
+
+# Listar todos os membros
+GET /membros
+# Retorna uma lista de todos os membros cadastrados.
+
+# Consultar um membro específico por ID
+GET /membros/<int:id>
+# Retorna os dados de um membro específico, incluindo a qual equipe pertence.
+
+# Atualizar um membro específico
+PUT /membros/<int:id>
+# Atualiza os dados de um membro específico. Permite atualizar nome, cargo e contato.
+
+# Remover um membro específico
+DELETE /membros/<int:id>
+# Remove um membro específico da equipe.

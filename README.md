@@ -28,12 +28,9 @@ MsEquipesTecnicas/
 1. Crie e ative um ambiente virtual:
    ```
    python -m venv .venv
-<<<<<<< HEAD
    ```
 2. No Windows, ative o ambiente virtual:
    ```
-=======
->>>>>>> aa39e6cc3ce45882062a878e176f643fdfed8fdd
    .venv\Scripts\activate
    ```
 2. Instale as dependências:

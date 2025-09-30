@@ -37,7 +37,7 @@ MsEquipesTecnicas/
    ```
    pip install -r requirements.txt
    ```
-3. Configure o banco PostgreSQL e ajuste a string de conexão em `app.py`:
+3. Configure o banco PostgreSQL, rotas de autenticação e microserviços. Ajuste a string(url) de conexão em `config.py`:
    ```python
    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://usuario:senha@localhost:5432/nome_do_banco'
    ```

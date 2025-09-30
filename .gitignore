@@ -2,9 +2,9 @@
 __pycache__/
 *.pyc
 .venv/
-venv
 *.rar
 *.zip
 *.tar
 *.log
 *.db
+venv

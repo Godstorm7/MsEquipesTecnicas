@@ -1,63 +1,52 @@
 # Rotas do serviço de Equipes Técnicas
 
-# Listar todas as equipes técnicas
-GET /equipes
-# Retorna uma lista de todas as equipes técnicas cadastradas.
+# --- Equipes ---
 
-# Consultar uma equipe técnica específica por ID
-GET /equipes/<int:id>
-# Retorna os dados de uma equipe técnica específica, incluindo seus membros.
+# [GET] /api/v1/equipes
+# Lista todas as equipes.
+# Permite filtrar por status e/ou especialidade com query parameters.
+# Ex: /api/v1/equipes?status=ATIVA&especialidade=hidraulica
 
-# Listar todas as equipes técnicas ativas
-GET /equipes/ativas
-# Retorna uma lista de equipes técnicas com status 'ativa'.
+# [GET] /api/v1/equipes/<id>
+# Busca uma equipe específica pelo seu ID.
 
-# Consultar uma equipe técnica ativa por ID
-GET /equipes/ativa/<int:id>
-# Retorna os dados de uma equipe ativa específica.
+#[GET] /api/v1/equipes?status=ATIVA
+# Retorna todas as equipes que estão ativas.
 
-# Listar equipes técnicas por status ('ativa' ou 'inativa')
-GET /equipes/status/<status>
-# Retorna equipes técnicas filtradas pelo status informado.
+#[GET] http://localhost:5000/api/v1/equipes/<int:id>/status
+# Busca o status de uma equipe específica pelo seu ID.
 
-# Criar uma nova equipe técnica
-POST /equipes
-# Cria uma nova equipe técnica. O corpo da requisição deve conter nome, especialidade, status ("ativa" ou "inativa") e, opcionalmente, membros.
-
-# Atualizar dados de uma equipe técnica
-PUT /equipes/<int:id>
-# Atualiza os dados de uma equipe técnica específica. Permite atualizar nome, especialidade, status e membros.
-
-# Atualizar apenas o status de uma equipe técnica
-PUT /equipes/<int:id>/<status>
-# Atualiza apenas o status ("ativa" ou "inativa") de uma equipe técnica.
-
-# Excluir (ou desativar) uma equipe técnica
-DELETE /equipes/<int:id>
-# Exclui uma equipe técnica específica. Dependendo da implementação, pode ser uma exclusão lógica (desativação).
+#[GET] /api/v1/equipes/status/ativa/<int:id>
+# Retorna equipe se a equipe com id está ativa.
 
 
+# [POST] /api/v1/equipes
+# Cria uma nova equipe.
 
 
+# [PUT] /api/v1/equipes/<int:id>
+# Atualiza todos os dados de uma equipe.
 
-# Rotas para gerenciamento de membros das equipes técnicas
+# [PATCH] /api/v1/equipes/<int:id>/<status>
+# Atualiza parcialmente o status de uma equipe (ex: de ATIVA para INATIVA).
 
-# Criar um novo membro em uma equipe
-POST /membros
-# Cria um novo membro em uma equipe existente. O corpo da requisição deve conter nome, cargo, contato e equipe_id.
 
-# Listar todos os membros
-GET /membros
-# Retorna uma lista de todos os membros cadastrados.
+# [DELETE] /api/v1/equipes/<int:id>
+# Deleta uma equipe (se não tiver ordens de serviço) ou a desativa.
 
-# Consultar um membro específico por ID
-GET /membros/<int:id>
-# Retorna os dados de um membro específico, incluindo a qual equipe pertence.
 
-# Atualizar um membro específico
-PUT /membros/<int:id>
-# Atualiza os dados de um membro específico. Permite atualizar nome, cargo e contato.
+# --- Membros ---
+# [GET] /api/v1/membros
+# Lista todos os membros de todas as equipes.
 
-# Remover um membro específico
-DELETE /membros/<int:id>
-# Remove um membro específico da equipe.
+# [POST] /api/v1/membros
+# Cria um novo membro e o associa a uma equipe.
+
+# [GET] /api/v1/membros/<id>
+# Busca um membro específico pelo seu ID.
+
+# [PUT] /api/v1/membros/<id>
+# Atualiza os dados de um membro.
+
+# [DELETE] /api/v1/membros/<id>
+# Remove um membro.

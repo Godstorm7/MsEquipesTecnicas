@@ -78,6 +78,12 @@ def atualizar_membro(id):
     m.nome = data.get('nome', m.nome)
     m.cargo = data.get('cargo', m.cargo)
     m.contato = data.get('contato', m.contato)
+    m.equipe_id = data.get('equipe_id', m.equipe_id)
+    equipe = EquipeTecnica.query.get(m.equipe_id)
+    if not equipe:
+        abort(404, 'Equipe não encontrada.')
+    if len(equipe.membros) > 10:
+        abort(400, 'Uma equipe não pode ter mais de 10 membros.')
     db.session.commit()
     return jsonify({'message': 'Membro atualizado com sucesso.'})
 

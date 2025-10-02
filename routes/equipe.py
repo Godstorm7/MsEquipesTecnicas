@@ -28,7 +28,10 @@ def criar_equipe():
         status_enum = StatusEquipeEnum[status.upper()]
     except KeyError:
         abort(400, 'Status inválido. Use "ativa" ou "inativa".')
-    equipe = EquipeTecnica(nome=nome, especialidade=especialidade, status=status_enum)
+    equipe = EquipeTecnica(nome=nome,
+                           especialidade=especialidade,
+                           status=status_enum
+                           )
     db.session.add(equipe)
     db.session.flush()  # Para obter o ID da equipe
     for membro in membros:
@@ -198,7 +201,7 @@ def desativar_ou_deletar_equipe(id):
         response = requests.get(url_ordens,headers=headers, timeout=3)
         response.raise_for_status()
         ordens = response.json()
-        #feito isso abaixo pq os cara usaram umas page ai da vida
+        #feito isso abaixo porque os cara usaram umas page ai da vida
         ordens = ordens['content']
     # em caso de erro faz o L
     except Exception as e:

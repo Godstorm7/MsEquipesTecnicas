@@ -27,7 +27,6 @@ with app.app_context():
 app.register_blueprint(equipe_bp)
 app.register_blueprint(membro_bp)
 
-@app.route('/')
 def hello_world():
     return 'Hello World!'
 

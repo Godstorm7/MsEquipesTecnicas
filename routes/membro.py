@@ -5,7 +5,11 @@ from models.EquipeTecnica import EquipeTecnica
 
 membro_bp = Blueprint('membro', __name__)
 
-@membro_bp.route('/membros', methods=['POST'])
+
+#       Rota de Create
+
+##cria membro
+@membro_bp.route('/api/v1/membros', methods=['POST'])
 def criar_membro():
     data = request.get_json()
     nome = data.get('nome')
@@ -24,7 +28,14 @@ def criar_membro():
     db.session.commit()
     return jsonify({'id': membro.id}), 201
 
-@membro_bp.route('/membros', methods=['GET'])
+
+#--------------------------------------------------------------
+
+
+#       Rotas de Read
+
+##consulta todos os membros
+@membro_bp.route('/api/v1/membros', methods=['GET'])
 def listar_membros():
     membros = MembroEquipe.query.all()
     result = []
@@ -38,7 +49,11 @@ def listar_membros():
         })
     return jsonify(result)
 
-@membro_bp.route('/membros/<int:id>', methods=['GET'])
+
+#--------------------------------------------------------------
+
+##consulta membro por id
+@membro_bp.route('/api/v1/membros/<int:id>', methods=['GET'])
 def consultar_membro(id):
     m = MembroEquipe.query.get_or_404(id)
     return jsonify({
@@ -49,20 +64,39 @@ def consultar_membro(id):
         'equipe_id': m.equipe_id
     })
 
-@membro_bp.route('/membros/<int:id>', methods=['PUT'])
+
+#--------------------------------------------------------------
+
+
+#       Rotas de Update
+
+##atualiza membro
+@membro_bp.route('/api/v1/membros/<int:id>', methods=['PUT'])
 def atualizar_membro(id):
     m = MembroEquipe.query.get_or_404(id)
     data = request.get_json()
     m.nome = data.get('nome', m.nome)
     m.cargo = data.get('cargo', m.cargo)
     m.contato = data.get('contato', m.contato)
+    m.equipe_id = data.get('equipe_id', m.equipe_id)
+    equipe = EquipeTecnica.query.get(m.equipe_id)
+    if not equipe:
+        abort(404, 'Equipe não encontrada.')
+    if len(equipe.membros) > 10:
+        abort(400, 'Uma equipe não pode ter mais de 10 membros.')
     db.session.commit()
     return jsonify({'message': 'Membro atualizado com sucesso.'})
 
-@membro_bp.route('/membros/<int:id>', methods=['DELETE'])
+
+#--------------------------------------------------------------
+
+
+#       Rota de Delete
+
+##remove membro
+@membro_bp.route('/api/v1/membros/<int:id>', methods=['DELETE'])
 def remover_membro(id):
     m = MembroEquipe.query.get_or_404(id)
     db.session.delete(m)
     db.session.commit()
     return jsonify({'message': 'Membro removido com sucesso.'})
-
